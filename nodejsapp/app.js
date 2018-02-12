@@ -14,33 +14,34 @@ app.set('views', path.join(__dirname, 'views'));
 
 // Body Parser Middleware
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
 
 // Set Static Path
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Global Vars
-app.use(function(req, res, next){
-	res.locals.errors = null;
+app.use(function (req, res, next) {
+  res.locals.errors = null;
   res.locals.customers = null;
-	next();
+  next();
 });
 
 // Express Validator Middleware
 app.use(expressValidator());
 
 // Create connection to database
-const config =
-   {
-     userName: 'testCase', // update me
-     password: 'quHgJan8sox0xiA3', // update me
-     server: 'vsuhackathon.database.windows.net', // update me
-     options:
-        {
-           database: 'hackathon' //update me
-           , encrypt: true
-        }
-   }
+const config = {
+  userName: 'testCase', // update me
+  password: 'quHgJan8sox0xiA3', // update me
+  server: 'vsuhackathon.database.windows.net', // update me
+  options: {
+    database: 'hackathon' //update me
+      ,
+    encrypt: true
+  }
+}
 const connection = new Connection(config);
 
 const sqlStatement = "select FirstName, LastName FROM Customer";
@@ -56,17 +57,16 @@ const sqlStatement = "select FirstName, LastName FROM Customer";
 //     //}
 // });
 //var customers;
-connection.on('connect', function(err) {
-    // If no error, then good to go...
-    executeStatement();
-  }
-);
+connection.on('connect', function (err) {
+  // If no error, then good to go...
+  executeStatement();
+});
 
 var customers = [];
 
 function executeStatement() {
 
-  request = new Request(sqlStatement, function(err, rowCount) {
+  request = new Request(sqlStatement, function (err, rowCount) {
     if (err) {
       console.log(err);
     } else {
@@ -75,8 +75,8 @@ function executeStatement() {
     connection.close();
   });
 
-  request.on('row', function(columns) {
-		/*
+  request.on('row', function (columns) {
+    /*
     columns.forEach(function(column) {
 
       if (column.value === null) {
@@ -101,46 +101,46 @@ function executeStatement() {
       }
     });
 		*/
-		//columns.forEach(function(column) {
-		for (var i = 0; i < columns.length; i+= 2){
-			if (columns.value === null) {
-				console.log('NULL');
-			} else {
-				var customer = columns[i].value + " " + columns[i+1].value;
-//				customers.push(columns[i].value);
-//				customers.push(columns[i+1].value);
-				customers.push(customer);
-				//console.log(column.value);
-				//console.log('this is a test for customers: ' + customers);
+    //columns.forEach(function(column) {
+    for (var i = 0; i < columns.length; i += 2) {
+      if (columns.value === null) {
+        console.log('NULL');
+      } else {
+        var customer = columns[i].value + " " + columns[i + 1].value;
+        //				customers.push(columns[i].value);
+        //				customers.push(columns[i+1].value);
+        customers.push(customer);
+        //console.log(column.value);
+        //console.log('this is a test for customers: ' + customers);
 
-				customers.forEach(function(val){
-					console.log('this is a customer value: ' + val);
-					//customer.push(val);
-				});
+        customers.forEach(function (val) {
+          console.log('this is a customer value: ' + val);
+          //customer.push(val);
+        });
 
-				app.get('/', function(req, res) {
-						res.render('index', {
-							title: 'Customers',
-							customers: customers
-						});
-				});
+        app.get('/', function (req, res) {
+          res.render('index', {
+            title: 'Customers',
+            customers: customers
+          });
+        });
 
-			}
-		};
+      }
+    };
   });
 
-  request.on('done', function(rowCount, more) {
-      console.log(rowCount + ' rows returned');
-    });
+  request.on('done', function (rowCount, more) {
+    console.log(rowCount + ' rows returned');
+  });
 
   connection.execSql(request);
 };
 
-app.get('/', function(req, res) {
-    res.render('index', {
-			title: 'Customers',
-			customers: customers
-		});
+app.get('/', function (req, res) {
+  res.render('index', {
+    title: 'Customers',
+    customers: customers
+  });
 });
 
 
@@ -163,8 +163,8 @@ console.log('This is a test inside of GET: ' + customers);
 
 
 
-        //    var customer = connectToDB();
-        //console.log('HERE::::: ' + customer);
+//    var customer = connectToDB();
+//console.log('HERE::::: ' + customer);
 /*----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
         connection.on('connect', function(err) {
@@ -335,7 +335,7 @@ function queryDatabase()
 
 
 */
- //Opens port
- app.listen(3000, function(){
- 	console.log('Server Started on Port 3000');
- });
+//Opens port
+app.listen(3000, function () {
+  console.log('Server Started on Port 3000');
+});
