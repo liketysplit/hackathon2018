@@ -4,7 +4,6 @@ block content
     h1 #{title}
     ul.list-group
         if user
-            
             form(method='POST', action='/addItem')
                 #form-group
                     label Recyle Location:
@@ -17,5 +16,3 @@ block content
                     input.form-control(name='qnty', type='number')
                 br
                 input.btn.btn-primary(type='submit', value='Submit')
-        else
-            h4 Please Sign in to Add Recycle Items

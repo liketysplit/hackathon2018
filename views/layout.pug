@@ -4,7 +4,7 @@ html
         title Knowledgebase
         link(rel='stylesheet', href='/bower_components/bootstrap/dist/css/bootstrap.css')
         link(rel='stylesheet', href='/css/style.css')    
-    body
+    body(data-locations=locals.docsJSON)
         nav.navbar.navbar-expand-md.navbar-dark.bg-dark
             a.navbar-brand(href='/') Knowledgebase
             button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarsExampleDefault', aria-controls='navbarsExampleDefault', aria-expanded='false', aria-label='Toggle navigation')
@@ -13,7 +13,7 @@ html
                 ul.navbar-nav.mr-auto
                     if user
                         li.nav-item
-                            a.nav-link(href='/articles/add') Add Article
+                            a.nav-link(href='/articles/add') Add Recycle Item
                         li.nav-item 
                             a.nav-link(href="/maps/map") Map
                         li.nav-item 

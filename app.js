@@ -45,6 +45,10 @@ const app = express();
 
 //bring in Models
 let Article = require('./models/article');
+//bring in User Models
+let User = require('./models/user');
+//bring in Recycle Models
+let Recycle = require('./models/recycle');
 
 // Load View Engine
 // app.set('views', path.join(__dirname, './views'));
@@ -106,16 +110,67 @@ app.get('*', (req, res, next) => {
 
 //Home route
 app.get('/', (req, res) => {
-    Article.find({}, (err, articles) => {
+    User.find({}, (err, users) => {
         if (err){
             console.log(err);
         }else{
             res.render('index', {
-                title: 'Articles',
-                articles: articles
+                title: 'Add Recycle Item',
+                users: users
             });
         }
     });
+});
+
+// //AddItem GET route
+// app.get('/addReycle', (req, res) => {
+//     User.find({}, (err, users) => {
+//         if (err){
+//             console.log(err);
+//         }else{
+//             res.render('addReycle', {
+//                 title: 'Add Recycle Item',
+//                 users: users
+//             });
+//         }
+//     });
+// });
+
+app.post('/addItem', (req, res) => {
+    const locname = req.body.locname;
+    const type = req.body.type;
+    const qnty = req.body.qnty;
+    
+    req.checkBody('locname', 'Location Name is Required..').notEmpty();
+    req.checkBody('type', 'Quanity is required.').notEmpty();
+    req.checkBody('qnty', 'Quanity of items is required..').notEmpty();
+
+    let errors = req.validationErrors();
+
+    if (errors){
+        res.render('createMarker', {
+            title: 'Add Reycle Item',
+            errors:errors
+        });
+    }else {
+        let newRecyle = new Recycle({
+            locname: locname,
+            type: type,
+            qnty: qnty,
+            creator: req.user._id
+        });
+        console.log(newRecyle.lat);
+
+        newRecyle.save( (err) => {
+            if (err){
+                console.log(err);
+                return;
+            }else{
+                req.flash('success', 'Great job on recyling.');
+                res.redirect('/index');
+            }
+        });
+    }
 });
 
 // // Map Route

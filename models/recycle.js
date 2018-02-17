@@ -1,16 +1,16 @@
 const mongoose = require('mongoose');
 
-// Marker Schema
-const MarkerSchema = mongoose.Schema({
+// Recycle Schema
+const RecycleSchema = mongoose.Schema({
     locname: {
         type: String,
         required: true
     },
-    lat:{
-        type: Number,
+    type:{
+        type: String,
         required: true
     },
-    long:{
+    qnty:{
         type: Number,
         required: true
     },
@@ -22,4 +22,4 @@ const MarkerSchema = mongoose.Schema({
 
 // const User = mongoose.model('User', UserSchema);
 // module.exports = User;
-const User = module.exports = mongoose.model('Map', MarkerSchema);
+const Recycle = module.exports = mongoose.model('Recycle', RecycleSchema);

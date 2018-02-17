@@ -2,5 +2,27 @@ extends layout
 
 block content
     h1 #{title}
+    - var markerz = markers;
+    ul.list-group
+        each marker, i in markerz
+            li.list-group-item
+                a(href='/map/' id=marker.locname)= marker.locname
+                p(value=marker.lat)= marker.lat
+                p(value=marker.long)= marker.long
     #map
-  
+    //- script.
+    //-     var docs = JSON.parse($('body').attr('data-locations'));
+    //-     function initMap() {
+    //-     var uluru = {lat: 30.848424, lng: -83.289238};
+    //-     var map = new google.maps.Map(document.getElementById('map'), {
+    //-     zoom: 15,
+    //-     center: uluru
+    //-     });
+        
+    //-     //- console.log(docs[0]);
+    //-     var marker = new google.maps.Marker({
+    //-     position: uluru,
+    //-     map: map
+    //-     });
+    //-     }
+    //-     initMap();
