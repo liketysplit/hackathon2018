@@ -3,11 +3,11 @@ const mongoose = require('mongoose');
 // Marker Schema
 const MarkerSchema = mongoose.Schema({
     lat:{
-        type: Number,
+        type: String,
         required: true
     },
     long:{
-        type: Number,
+        type: String,
         required: true
     },
     creator:{
@@ -18,4 +18,4 @@ const MarkerSchema = mongoose.Schema({
 
 // const User = mongoose.model('User', UserSchema);
 // module.exports = User;
-const User = module.exports = mongoose.model('Marker', MarkerSchema);
+const User = module.exports = mongoose.model('Map', MarkerSchema);
