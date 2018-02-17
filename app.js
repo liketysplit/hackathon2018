@@ -111,14 +111,17 @@ app.get('*', (req, res, next) => {
 //Home route
 app.get('/', (req, res) => {
     User.find({}, (err, users) => {
-        if (err){
-            console.log(err);
-        }else{
-            res.render('index', {
-                title: 'Add Recycle Item',
-                users: users
-            });
-        }
+        Recycle.find({}, (err, recycles) => {
+            if (err){
+                console.log(err);
+            }else{
+                res.render('index', {
+                    title: 'Add Recycle Item',
+                    users: users,
+                    recycles: recycles
+                });
+            }
+        });
     });
 });
 

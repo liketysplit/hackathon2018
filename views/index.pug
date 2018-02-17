@@ -4,7 +4,10 @@ block content
     h1 #{title}
     ul.list-group
         if user
-            
+            ul.list-group
+                each r, i in recycles
+                    if (r.creator == user._id)
+                        li.list-group-item= r.locname
             form(method='POST', action='/addItem')
                 #form-group
                     label Recyle Location:
