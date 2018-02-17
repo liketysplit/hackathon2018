@@ -1,0 +1,13 @@
+extends layout
+
+block content
+    h1 #{title}
+    form(method='POST', action='/maps/createMarker')
+        #form-group
+            label Latitude:
+            input.form-control(name='lat', type='text')
+        #form-group
+            label Longitude:
+            input.form-control(name='long', type='text')
+        br
+        input.btn.btn-primary(type='submit', value='Submit')
