@@ -26,6 +26,16 @@ public class UserManager {
 			return false;
 	}
 
+	public boolean hasUser(String uName){
+
+		for(User u : myUsers){
+			if(u.getuserName().equals(uName)){
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public User getUserWithUserName(String userName){
 		User u = new User(userName);
 		int i = myUsers.indexOf(u);
@@ -40,7 +50,7 @@ public class UserManager {
 		for(User u : myUsers){
 			clonedUsers.add(u);
 		}
-		Collections.sort(clonedUsers);
+		Collections.sort(clonedUsers, Collections.reverseOrder());
 		return clonedUsers;
 	}
 
@@ -48,12 +58,13 @@ public class UserManager {
 		StringBuilder s = new StringBuilder();
 		myUsers = this.sortedUsers();
 		s.append(String.format("Rank\tUsername\t\tRXP\n"));
-		s.append("----------------------------------------------------------");
+		s.append("--------------------------------------------------\n");
 		int count = 1;
 		for (User u: myUsers){
-			s.append(String.format(" %d \t%s\t\t%d\n", count, u.getuserName(), u.getrxp()));
+			s.append(String.format(" %d \t\t%10s\t\t%d\n", count, u.getuserName(), u.getrxp()));
 			count++;
 		}
+		System.out.print(s.toString());
 		return s.toString();
 	}
 }

@@ -12,6 +12,12 @@ public class User implements Comparable<User>{
 	public User(String userName){
 		this.userName = userName;
 	}
+	public User(String userName, String password){
+		this.userName = userName;
+		this.password = password;
+		this.rxp = 0;
+		this.level = 1;
+	}
 	public User(String Fname, String Lname, String userName, String email, String password){
 		this.Fname = Fname;
 		this.Lname = Lname;
@@ -44,12 +50,19 @@ public class User implements Comparable<User>{
 	public int getrxp(){
 		return rxp;
 	}
+	public void setrxp(int i){
+		this.rxp = i;
+	}
 	public int getlevel(){
 		return level;
 	}
 
 	public void addRecycle(int points){
 		rxp += points;
-		level = rxp/100;
+		level = rxp/100 + 1;
+	}
+
+	public boolean checkPass(String p){
+		return this.password.equals(p);
 	}
 }
