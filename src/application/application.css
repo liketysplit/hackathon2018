@@ -15,6 +15,12 @@
     -fx-stroke-width: 2px;
     -fx-effect: null;
 }
+#user-name {
+    -fx-font-size: 20pt;
+    -fx-background-color: rgb(200,200,200);
+    -fx-background-radius: 20;
+    -fx-label-padding: 7;
+}
 
 .default-color0.chart-series-line { -fx-stroke: #e83737; }
 .default-color1.chart-series-line { -fx-stroke: #537f4b; }
